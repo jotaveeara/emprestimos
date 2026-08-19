@@ -57,6 +57,12 @@ Abra o endereço do GitHub Pages no Chrome. No menu do navegador, toque em **Adi
 - Diário: R$ 500 = 20 × R$ 35; R$ 600 = 20 × R$ 40; R$ 700 = 20 × R$ 46; R$ 800 = 20 × R$ 54; R$ 900 = 20 × R$ 60; R$ 1.000 = 20 × R$ 65. Domingos são pulados.
 - Semanal: opções de 4, 6 e 8 semanas estão na constante `WEEKLY` no início de `script.js`.
 - Mensal: o valor emprestado, a quantidade de meses e o valor de cada parcela são digitados manualmente no cadastro.
+- Diário e semanal: a opção **OUTRO** permite informar um valor emprestado diferente da tabela. Nesse caso, informe também o valor da parcela.
+- Nos valores predefinidos, use **Editar parcela** para substituir a sugestão da tabela; total e lucro são recalculados imediatamente.
+
+## Atualização para quem já executou o SQL anterior
+
+Execute uma única vez o arquivo `supabase-update-v2.sql` no **SQL Editor** do Supabase. Ele adiciona o campo necessário para editar e inativar clientes sem apagar o histórico.
 
 ## Observações importantes
 

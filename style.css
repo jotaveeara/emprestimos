@@ -3,6 +3,7 @@
 :root{--green:#f5c542;--green-dark:#3b300d}
 .brand-mark,.primary{color:#1a1400}.primary:hover{background:#ffd666}input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px rgba(245,197,66,.18)}.status.paid{color:#fde68a}
 input,select,textarea{font-size:16px}
+.field-group{display:grid;gap:7px}.field-group button{justify-self:start}.check-row{display:flex;align-items:center;gap:10px;font-size:1rem}.check-row input{width:20px;height:20px;accent-color:var(--green)}.client-actions{display:flex;align-items:center;gap:12px}.list-item.inactive{opacity:.65}.status.inactive{background:#27272a;color:#d4d4d8}
 .field-hint{color:var(--muted);font-size:.72rem;margin:-8px 0 0;line-height:1.4}
 @media(max-width:760px){.metric-grid{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.preview{grid-template-columns:1fr}.nav-btn{min-width:0;flex:1}.section-head{align-items:flex-start}.list-item{align-items:flex-start}.content{padding-top:22px}}
 @media(max-width:390px){.metric-grid{grid-template-columns:1fr}.section-head{flex-wrap:wrap}.auth-card{padding:24px}.topbar{padding-inline:14px}}
