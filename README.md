@@ -1,6 +1,6 @@
 # Carteira — aplicativo de empréstimos
 
-Aplicativo PWA para GitHub Pages com login Supabase, separação de dados por usuário, clientes, empréstimos, parcelas, pagamentos, atrasos e fechamento mensal.
+Aplicativo PWA para GitHub Pages com acesso por nome da conta e senha, separação de dados por usuário, clientes, empréstimos, parcelas, pagamentos, atrasos e fechamento mensal.
 
 ## Passo 1 — criar o projeto no Supabase
 
@@ -8,7 +8,9 @@ Aplicativo PWA para GitHub Pages com login Supabase, separação de dados por us
 2. No menu lateral, abra **SQL Editor** e clique em **New query**.
 3. Abra o arquivo `supabase.sql`, copie todo o conteúdo, cole no editor e clique em **Run**.
 4. Abra **Authentication > Providers > Email** e mantenha Email habilitado.
-5. Para exigir confirmação por e-mail, mantenha **Confirm email** ligado. Para testes imediatos, você pode desligá-lo temporariamente.
+5. Desative **Confirm email** e salve. Este passo é obrigatório nesta primeira versão, pois o usuário entra somente com nome da conta e senha.
+
+O aplicativo cria internamente um identificador técnico no formato `nome-da-conta@acesso.carteira.local`. Esse endereço nunca aparece para o usuário e não recebe mensagens. Depois dos testes, o cadastro poderá ser evoluído para usar e-mail real, recuperação de senha ou outro método de acesso.
 
 ## Passo 2 — conectar o aplicativo
 
@@ -60,5 +62,7 @@ Abra o endereço do GitHub Pages no Chrome. No menu do navegador, toque em **Adi
 
 - A URL e a chave pública do Supabase ficam visíveis no navegador por definição. A segurança dos dados é feita pelas políticas RLS do arquivo SQL.
 - Cada usuário autenticado acessa somente os próprios registros.
+- Na tela inicial, o usuário escolhe um nome de conta e uma senha. Depois, entra sempre com esses mesmos dois dados.
+- Se esquecer a senha nesta primeira versão, não haverá recuperação automática. A recuperação será adicionada na próxima etapa.
 - O aplicativo precisa ser testado pelo endereço HTTPS do GitHub Pages. Abrir `index.html` diretamente no computador não testa corretamente o PWA.
 - Para uso real de concessão de crédito, valide as obrigações jurídicas, tributárias, de cobrança e de proteção de dados aplicáveis.

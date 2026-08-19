@@ -6,6 +6,7 @@
     500:{4:150,6:110,8:90},600:{4:180,6:132,8:108},700:{4:210,6:154,8:126},
     800:{4:240,6:176,8:144},900:{4:270,6:198,8:162},1000:{4:300,6:220,8:180}
   };
+  const LOGIN_DOMAIN = "acesso.carteira.local";
   const $ = id => document.getElementById(id);
   const state = {client:null,user:null,clients:[],loans:[],installments:[],payments:[]};
   const money = value => Number(value||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
@@ -37,11 +38,13 @@
     $("charge-filter").addEventListener("change",renderCharges);$("loan-filter").addEventListener("change",renderLoans);$("closing-month").addEventListener("change",renderClosing);
     $("charges-list").addEventListener("click",handleListClick);$("loans-list").addEventListener("click",handleListClick);$("loan-detail-dialog").addEventListener("click",handleListClick);
   }
-  async function login(event){event.preventDefault();setAuthBusy(true);const {error}=await state.client.auth.signInWithPassword({email:$("auth-email").value.trim(),password:$("auth-password").value});setAuthBusy(false);if(error)toast(authMessage(error.message),true)}
-  async function signup(){setAuthBusy(true);const {data,error}=await state.client.auth.signUp({email:$("auth-email").value.trim(),password:$("auth-password").value});setAuthBusy(false);if(error)return toast(authMessage(error.message),true);toast(data.session?"Conta criada.":"Conta criada. Confirme o e-mail para entrar.")}
-  function authMessage(msg){if(/Invalid login/i.test(msg))return"E-mail ou senha incorretos.";if(/already registered/i.test(msg))return"Este e-mail já está cadastrado.";return msg}
+  function accountId(value){return value.trim().normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,".").replace(/^\.|\.$/g,"").slice(0,30)}
+  function accountCredentials(){const accountName=$("auth-username").value.trim(),id=accountId(accountName),password=$("auth-password").value;if(id.length<3)throw new Error("Escolha um nome de conta com pelo menos 3 letras ou números.");if(password.length<6)throw new Error("A senha precisa ter pelo menos 6 caracteres.");return {accountName,email:`${id}@${LOGIN_DOMAIN}`,password}}
+  async function login(event){event.preventDefault();let credentials;try{credentials=accountCredentials()}catch(error){return toast(error.message,true)}setAuthBusy(true);const {error}=await state.client.auth.signInWithPassword({email:credentials.email,password:credentials.password});setAuthBusy(false);if(error)toast(authMessage(error.message),true)}
+  async function signup(){if(!$("auth-form").reportValidity())return;let credentials;try{credentials=accountCredentials()}catch(error){return toast(error.message,true)}setAuthBusy(true);const {data,error}=await state.client.auth.signUp({email:credentials.email,password:credentials.password,options:{data:{account_name:credentials.accountName}}});setAuthBusy(false);if(error)return toast(authMessage(error.message),true);toast(data.session?"Conta criada. Você já pode usar o aplicativo.":"Conta criada, mas a confirmação de e-mail ainda está ligada no Supabase.")}
+  function authMessage(msg){if(/Invalid login/i.test(msg))return"Nome da conta ou senha incorretos.";if(/already registered|already been registered/i.test(msg))return"Este nome de conta já está em uso.";if(/email rate limit/i.test(msg))return"Muitas tentativas. Aguarde alguns minutos.";return msg}
   function setAuthBusy(busy){$("login-btn").disabled=busy;$("signup-btn").disabled=busy}
-  async function applySession(session){state.user=session?.user||null;$("auth-screen").hidden=!!state.user;$("app").hidden=!state.user;if(!state.user){state.clients=[];state.loans=[];return}$("user-email").textContent=state.user.email;await loadData()}
+  async function applySession(session){state.user=session?.user||null;$("auth-screen").hidden=!!state.user;$("app").hidden=!state.user;if(!state.user){state.clients=[];state.loans=[];return}$("user-name").textContent=state.user.user_metadata?.account_name||state.user.email?.split("@")[0]||"Minha conta";await loadData()}
   async function loadData(){
     const [clients,loans,installments,payments]=await Promise.all([
       state.client.from("clients").select("*").order("name"),

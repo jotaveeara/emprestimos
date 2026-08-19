@@ -23,9 +23,10 @@
       <div class="brand-mark" aria-hidden="true">C</div>
       <p class="eyebrow">CARTEIRA</p>
       <h1>Controle seus recebimentos.</h1>
-      <p class="muted">Entre para acessar seus clientes e empréstimos.</p>
+      <p class="muted">Digite o nome da sua conta e sua senha.</p>
       <form id="auth-form" class="stack">
-        <label>E-mail<input id="auth-email" type="email" autocomplete="email" required placeholder="voce@email.com"></label>
+        <label>Nome da conta<input id="auth-username" type="text" autocomplete="username" minlength="3" maxlength="30" required placeholder="Ex.: joao" spellcheck="false" autocapitalize="none"></label>
+        <p class="field-hint">Use de 3 a 30 caracteres. Espaços e acentos são aceitos.</p>
         <label>Senha<input id="auth-password" type="password" minlength="6" autocomplete="current-password" required placeholder="Mínimo de 6 caracteres"></label>
         <button id="login-btn" type="submit" class="primary">Entrar</button>
         <button id="signup-btn" type="button" class="secondary">Criar conta</button>
@@ -36,7 +37,7 @@
 
   <div id="app" class="app-shell" hidden>
     <header class="topbar">
-      <div><p class="eyebrow">CARTEIRA</p><strong id="user-email"></strong></div>
+      <div><p class="eyebrow">CARTEIRA</p><strong id="user-name"></strong></div>
       <button id="logout-btn" class="ghost small">Sair</button>
     </header>
 
