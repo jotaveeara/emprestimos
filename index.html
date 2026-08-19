@@ -90,7 +90,8 @@
       <div class="form-grid">
         <label>Cliente<select id="loan-client" required></select></label>
         <label>Plano<select id="loan-plan" required><option value="daily">Diário</option><option value="weekly">Semanal</option><option value="monthly">Mensal configurável</option></select></label>
-        <label>Valor emprestado<select id="loan-amount" required></select></label>
+        <label id="loan-amount-preset-wrap">Valor emprestado<select id="loan-amount" required></select></label>
+        <label id="loan-amount-custom-wrap" hidden>Valor emprestado<input id="loan-amount-custom" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="Digite o valor"></label>
         <label id="weekly-term-wrap" hidden>Prazo<select id="weekly-term"><option value="4">4 semanas</option><option value="6">6 semanas</option><option value="8">8 semanas</option></select></label>
         <label id="monthly-count-wrap" hidden>Quantidade de meses<input id="monthly-count" type="number" min="1" max="60" value="1"></label>
         <label id="monthly-installment-wrap" hidden>Valor da parcela<input id="monthly-installment" type="number" min="0.01" step="0.01"></label>

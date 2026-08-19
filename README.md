@@ -56,7 +56,7 @@ Abra o endereço do GitHub Pages no Chrome. No menu do navegador, toque em **Adi
 
 - Diário: R$ 500 = 20 × R$ 35; R$ 600 = 20 × R$ 40; R$ 700 = 20 × R$ 46; R$ 800 = 20 × R$ 54; R$ 900 = 20 × R$ 60; R$ 1.000 = 20 × R$ 65. Domingos são pulados.
 - Semanal: opções de 4, 6 e 8 semanas estão na constante `WEEKLY` no início de `script.js`.
-- Mensal: quantidade de meses e valor da parcela são informados no cadastro.
+- Mensal: o valor emprestado, a quantidade de meses e o valor de cada parcela são digitados manualmente no cadastro.
 
 ## Observações importantes
 
