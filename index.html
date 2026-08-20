@@ -53,6 +53,7 @@
 
       <section id="view-clients" class="view">
         <div class="section-head"><div><p class="eyebrow">CADASTROS</p><h2>Clientes</h2></div><button id="new-client-btn" class="primary small">Novo cliente</button></div>
+        <div class="filter-row"><select id="client-filter"><option value="active">Ativos</option><option value="archived">Arquivados</option><option value="all">Todos</option></select></div>
         <div id="clients-list" class="list panel"></div>
       </section>
 
@@ -81,9 +82,9 @@
       <label>Nome completo<input id="client-name" required maxlength="120"></label>
       <label>Telefone<input id="client-phone" type="tel" maxlength="30" placeholder="(00) 00000-0000"></label>
       <label>Observações<textarea id="client-notes" rows="3" maxlength="500"></textarea></label>
-      <label id="client-active-wrap" class="check-row" hidden><input id="client-active" type="checkbox" checked><span>Cliente ativo</span></label>
-      <p id="client-active-hint" class="field-hint" hidden>Desmarque quando não trabalhar mais com este cliente. O histórico será preservado.</p>
-      <button id="client-save-btn" type="submit" class="primary">Salvar cliente</button>
+      <label id="client-active-wrap" class="check-row" hidden><input id="client-active" type="checkbox" checked><span>Mostrar na lista de clientes ativos</span></label>
+      <p id="client-active-hint" class="field-hint" hidden>Desmarque para arquivar o cliente. O histórico financeiro será preservado.</p>
+      <div class="dialog-actions"><button id="client-save-btn" type="submit" class="primary">Salvar cliente</button><button id="delete-client-btn" type="button" class="ghost danger" hidden>Excluir cliente</button></div>
     </form>
   </dialog>
 

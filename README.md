@@ -35,6 +35,7 @@ sw.js
 supabase.sql
 supabase-update-v2.sql
 supabase-update-v3.sql
+supabase-update-v4.sql
 README.md
 icons/
   icon-192.png
@@ -61,13 +62,17 @@ Abra o endereço do GitHub Pages no Chrome. No menu do navegador, toque em **Adi
 - Mensal: o valor emprestado, a quantidade de meses e o valor de cada parcela são digitados manualmente no cadastro.
 - Diário e semanal: a opção **OUTRO** permite informar um valor emprestado diferente da tabela. Nesse caso, informe também o valor da parcela.
 - Nos valores predefinidos, use **Editar parcela** para substituir a sugestão da tabela; total e lucro são recalculados imediatamente.
-- Em um empréstimo já salvo, abra os detalhes e use **Editar parcelas abertas**. O novo valor é aplicado somente às parcelas ainda abertas; parcelas pagas permanecem iguais, e total e lucro são recalculados.
+- Em empréstimos ativos, **Editar empréstimo** permite corrigir o cliente, o valor emprestado, o valor das parcelas abertas e a data do lançamento. Parcelas pagas permanecem iguais, e total e lucro são recalculados.
+- **Excluir lançamento** remove um empréstimo criado por engano, suas parcelas e seus pagamentos. Assim, os valores também deixam de contar no fechamento mensal. A confirmação exige digitar `EXCLUIR`.
+- Clientes com histórico podem ser arquivados e ficam fora da lista **Ativos**. A exclusão permanente aparece somente para clientes sem nenhum empréstimo.
 
 ## Atualização para quem já executou o SQL anterior
 
 Execute uma única vez o arquivo `supabase-update-v2.sql` no **SQL Editor** do Supabase. Ele adiciona o campo necessário para editar e inativar clientes sem apagar o histórico.
 
 Para habilitar a edição de parcelas de empréstimos que já foram criados, execute também uma única vez o arquivo `supabase-update-v3.sql`. Não é necessário executar novamente o SQL completo.
+
+Para habilitar edição completa de empréstimos ativos, exclusão de lançamentos errados e exclusão segura de clientes sem histórico, execute uma única vez o arquivo `supabase-update-v4.sql`.
 
 ## Observações importantes
 
